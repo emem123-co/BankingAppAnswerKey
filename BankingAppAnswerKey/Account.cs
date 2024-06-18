@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BankingAppAnswerKey;
-public class Account //class 
+public class Account //classname
 {
-    public int AccountID {get; set;} = 0; //property
     
+    private static /*set to static because we won't want this to reset in each instance. value should remain the same as it changes to each time*/ int nextId {get; set;} = 1;
+    public int AccountID {get; set;} = 0; //property
     public string Description {get; set;} = string.Empty; //property
     public decimal Balance {get; set;} = 0; //property
 
@@ -47,6 +48,12 @@ public class Account //class
             ax.Deposit(Amount); //instance of account(ax), accessing deposit method. It is a method within a method. When Transfer is called in Program class, this will preform withdraw from account a1 and deposit in account ax, since they are both within the transfer method.
         }
         return true;
+    }
+    public Account(string description) 
+    {
+        AccountID = nextId++; 
+        Description = description;
+        Balance = 0;
     }
 
 }
